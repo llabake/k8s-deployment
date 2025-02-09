@@ -1,5 +1,5 @@
 #!/bin/bash
-tf_backend=terraform-sa-backend
+tf_backend=my-tf-sa-backend
 gcloud config set project $1
 
 gsutil mb gs://$1-tfstate

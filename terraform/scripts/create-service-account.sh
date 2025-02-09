@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "$1"
-echo "$2"=
+echo "$2"
 tf_backend="$2-backend"
 
 # Create Terraform main service account for use by Terraform repo
@@ -30,12 +30,9 @@ gcloud projects add-iam-policy-binding "$1" \
 
 gcloud projects add-iam-policy-binding "$1" \
     --member="serviceAccount:$2@$1.iam.gserviceaccount.com" \
-    --role="roles/secretmanager.secretAccessor"
-
-gcloud projects add-iam-policy-binding "$1" \
-    --member="serviceAccount:$2@$1.iam.gserviceaccount.com" \
     --role="roles/servicenetworking.networksAdmin"
 
-gcloud projects add-iam-policy-binding "$1" \
-    --member="serviceAccount:$2@$1.iam.gserviceaccount.com" \
-    --role="roles/bigquery.admin"
+#For testing locally with impersonation
+gcloud iam service-accounts add-iam-policy-binding "$1" \
+    --member="user:mmaryraphaella@gmail.com" \
+    --role="roles/iam.serviceAccountTokenCreator"
