@@ -9,7 +9,3 @@ data "google_container_cluster" "gke" {
 
   depends_on = [module.gke]
 }
-
-# data "google_compute_network" "apps_vpc" {
-#   name = "${var.env}-${var.terraform_workspace}-${var.region}"
-# }
