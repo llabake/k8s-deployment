@@ -1,0 +1,50 @@
+name: Terraform Workflow 
+
+on:
+  workflow_call:
+    inputs:
+      deploy_dir:
+        required: true
+        type: string
+      tf_vars:
+        required: true
+        type: string
+        
+    secrets:
+      workload_identity_provider:
+        required: false
+      workload_identity_service_account:
+        required: false
+        
+
+permissions: 
+  id-token: write
+  contents: read
+  pull-requests: write
+  actions: read
+  security-events: write
+
+jobs:
+  terraform_workflow:
+    runs-on: 'ubuntu-latest'
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: GCP Authenticate
+      id: gcp_auth
+      uses: google-github-actions/auth@v2
+      with:
+        token_format: access_token
+        workload_identity_provider: ${{ secrets.workload_identity_provider }}
+        service_account: ${{ secrets.workload_identity_service_account }}
+
+    - name: Terraform Init
+      uses: ./.github/actions/terraform_actions/init@main
+      with:
+        DEPLOY_DIR: ${{inputs.deploy_dir}}
+
+    - name: Terraform Validate
+      uses: ./.github/actions/terraform_actions/validate@main
+      with:
+        DEPLOY_DIR: ${{inputs.deploy_dir}}
