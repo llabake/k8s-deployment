@@ -1,6 +1,7 @@
 name: Terraform Workflow 
 
 on:
+  pull_request:
   workflow_call:
     inputs:
       deploy_dir:
