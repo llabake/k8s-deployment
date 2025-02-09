@@ -23,7 +23,7 @@ This will create the required Service Account in the provided GCP Project, and g
 
 ## Manually run *create-tf-storage-account.sh*
 ```bash    
-    ./create-tf-storage-account.sh <GCP Project ID> 
+    ./create-tf-storage-account.sh <GCP Project ID>
     (e.g. ./create-tf-storage-account.sh my-project-id)
 ```
 
@@ -38,5 +38,7 @@ This will create the GCP Storage Account necessary for Terraform Remote State.
 This will enable all the required GCP APIs for the rest of the pipelines/configuration.
 
 ```bash
-    ./create-gh-workload-identity.sh <GCP Project ID>
-    POOL_ID="salus-ent-prod-gitlab-runner" PROVIDER_ID="bootstrap-project" BOOTSTRAP_GITLAB_PROJECT_ID="52651570" GOOGLE_PROJECT_ID="salus-enterprise-prod" SERVICE_ACCOUNT_EMAIL="terraform-sa@salus-enterprise-prod.iam.gserviceaccount.com"
+    ./create-gh-workload-identity.sh <GCP Project ID> <GCP Project ID> <GCP Project ID> <GCP Project ID> <GCP Project ID> <GCP Project ID>
+    (e.g. ./create-gh-workload-identity.sh my-project-id my-pool-name my-provider-name my-repo-id my-tf-sa my-runner-sa)
+```
+This will create all resources needed for setting Workload identity federation with Github.

@@ -16,3 +16,6 @@ gcloud services enable iamcredentials.googleapis.com
 gcloud services enable container.googleapis.com
 
 gcloud services enable artifactregistry.googleapis.com
+
+roles/container.admin
+roles/iam.serviceAccountAdmin

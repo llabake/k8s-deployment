@@ -32,7 +32,11 @@ gcloud projects add-iam-policy-binding "$1" \
     --member="serviceAccount:$2@$1.iam.gserviceaccount.com" \
     --role="roles/servicenetworking.networksAdmin"
 
+gcloud projects add-iam-policy-binding "$1" \
+    --member="serviceAccount:$2@$1.iam.gserviceaccount.com" \
+    --role="roles/artifactregistry.writer"
+    
 #For testing locally with impersonation
-gcloud iam service-accounts add-iam-policy-binding "$1" \
-    --member="user:mmaryraphaella@gmail.com" \
-    --role="roles/iam.serviceAccountTokenCreator"
+gcloud projects add-iam-policy-binding"$1" \
+--member="user:mmaryraphaella@gmail.com" \
+--role="roles/iam.serviceAccountTokenCreator"
