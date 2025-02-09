@@ -1,0 +1,21 @@
+name: Terraform Initialize
+description: The terraform init command initializes a working directory containing Terraform configuration files
+
+inputs:
+  DEPLOY_DIR:
+    description: The directory where the Terraform code is located
+    required: true
+  BACKEND_CONF:
+    description: The location of the Terraform backend config file
+    required: true
+
+runs:
+  using: composite
+  steps: 
+    - name: Terraform Init
+      id: init
+      shell: bash
+      working-directory: ${{inputs.DEPLOY_DIR}}
+      run: |
+        terraform init -input=false
+        

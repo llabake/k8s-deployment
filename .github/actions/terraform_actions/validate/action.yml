@@ -1,0 +1,17 @@
+name: Terraform Validate
+description: The terraform validate command validates the configuration files in a directory
+
+inputs:
+  DEPLOY_DIR:
+    description: The directory where the Terraform code is located
+    required: true
+
+runs:
+  using: composite
+  steps: 
+    - name: Terraform Validate
+      id: validate
+      shell: bash
+      run: |
+        cd ${{inputs.DEPLOY_DIR}}
+        terraform validate
